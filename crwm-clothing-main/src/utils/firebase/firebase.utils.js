@@ -50,8 +50,8 @@ const firebaseConfig = {
   export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) =>{
     if(!userAuth) return;
     const userDocRef = doc(db, 'users', userAuth.uid)
-    const userSnapShot = await getDoc(userDocRef)
-    if(!userSnapShot.exists()){
+    const userSnapshot = await getDoc(userDocRef)
+    if(!userSnapshot.exists()){
       const { displayName, email } = userAuth;
       const createdAt = new Date();
       try{
@@ -65,7 +65,7 @@ const firebaseConfig = {
         console.log('error creating the user' , error.message)
       }
     }
-    return userDocRef
+    return userSnapshot;
   };
 
   export const createAuthUserWithEmailAndPassword = async (email,password)=>{
@@ -97,4 +97,17 @@ const firebaseConfig = {
 
     // return categoryMap
 
+  }
+
+  export const getCurrentUser = () => {
+    return new Promise((resolve, reject) =>{
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (userAuth) => {
+          unsubscribe();
+          resolve(userAuth);
+        },
+        reject
+      )
+    })
   }

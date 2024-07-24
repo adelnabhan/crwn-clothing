@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card.component';
 import { useSelector } from 'react-redux';
 import { selectCategoriesMap, selectCategoriesIsLoading } from '../../store/categories/category.selector';
-import Spinner from '../../components/spinner /spinner.component';
+import Spinner from '../../components/spinner/spinner.component';
 
 const Category = () => {
     console.log('[Category Component] render/re-rendering category component');
