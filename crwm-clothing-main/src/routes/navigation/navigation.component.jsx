@@ -6,16 +6,16 @@ import { selecCurrentUser } from "../../store/user/user.selector"
 import { signOutUser } from "../../utils/firebase/firebase.utils"
 import CartIcon from "../../components/cart-icon/cart-icon.component"
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { selectIsCartOpen } from "../../store/cart/cart.selector"
-
+import { signOutStart } from "../../store/user/user.action"
 
 const Navigation = ()=> {
     const currentUser = useSelector(selecCurrentUser)
     const isCartOpen = useSelector(selectIsCartOpen)
-
+    const dispatch = useDispatch();
    
-
+    const signOutUser = () => dispatch(signOutStart());
     return(
       <Fragment>
         <div className="navigation">
